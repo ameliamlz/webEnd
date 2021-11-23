@@ -314,6 +314,9 @@ null表示空对象 undefined 表示已在作用域中但未赋值的变量
 
 1. 获取匹配：pattern.exec(text)，返回匹配的字符
 2. 是否模式匹配：pattern.test(text)，返回true/false
+3. 匹配方法：match(), matchAll(), search(), replace(), split()
+
+应用：验证qq合法性
 
 
 
@@ -355,6 +358,7 @@ weakmap：只能以复杂数据类型作为key(如数组)，并且key值是弱�
   2. 私有化变量
   3. 模拟块级作用域
   4. 创建模块
+  5. 延长变量的生命周期
 
 - 闭包带来的问题
 
@@ -440,43 +444,68 @@ Object.prototype.__proto__ === null
 ### 事件监听的两种方式
 
 - onclick
+
 - addEventListener
+
+  
 
 ### 事件循环(EventLoop)
 
 ![img](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/1/18/1685f03d7f88792b~tplv-t2oaga2asx-watermark.awebp)
 
-概念：JS是单线程的，为防止一个函数执行时间过长阻塞后面的代码，所以会将同步代码压入执行栈中，将异步代码推入任务队列，任务队列又分为宏任务和微任务队列，因为宏任务队列的执行时间比较长，所以微任务要优先于宏任务队列。每次单个宏任务执行完之后，就会清空微任务。微任务：promise/promise.then/process.nextTick()(Node中),宏任务：**Script**/setTimeout(时间结束后执行)/setInterval(间隔时间内不断执行)/setImmediate/I/O/UI rendering
+概念：JS是单线程的，为防止一个函数执行时间过长阻塞后面的代码，所以会将同步代码压入执行栈中，将异步代码推入任务队列，任务队列又分为宏任务和微任务队列，因为宏任务队列的执行时间比较长，所以微任务要优先于宏任务队列。每次单个宏任务执行完之后，就会清空微任务。
+
+- 微任务：promise/promise.then/process.nextTick()(Node中),
+- 宏任务：**Script**/setTimeout(时间结束后执行)/setInterval(间隔时间内不断执行)/setImmediate/I/O/UI rendering/postMessage/MessageChannel
 
 优先级：
 
 - setTimeout = setInterval 一个队列
+
 - setTimeout > setImmediate 
+
 - process.nextTick > Promise
 
-### 事件流
+  
+
+async 和 await:
+
+​	`async`就是用来声明一个异步方法，而 `await `是用来等待异步方法执行, 不管`await`后面跟着的是什么，`await`都会阻塞后面的代码
+
+
+
+
+
+### 事件模型
 
 事件流是指网页元素接收事件的顺序，包括三个阶段：事件捕获阶段、处于目标阶段、事件冒泡阶段。
 
-- Dom0级
+- 原始事件模型(Dom0级)：事件绑定（html代码绑定，JS代码绑定）；绑定速度快；支持冒泡，不支持捕获；同一类型的事件只能绑定一次；
 
-- Dom2级事件有三个参数：第一个参数是事件名（如click）；第二个参数是事件处理程序函数；第三个参数如果是true的话表示在捕获阶段调用，为false的话表示在冒泡阶段调用。
+- Dom2级事件有三个参数：事件流；可以绑定多个。第一个参数是事件名（如click）；第二个参数是事件处理程序函数；第三个参数如果是true的话表示在捕获阶段调用，为false的话表示在冒泡阶段调用。
 
 - Dom3级
 
   注：同一个元素的同一种事件只能绑定一个函数，否则后面的函数会覆盖之前的函数
+  
+- IE事件模型：事件处理+事件冒泡
 
 
 
-### 事件冒泡、捕获（委托）
+### 事件流-事件冒泡、捕获（委托）
 
 事件捕获发生在事件冒泡之前
 
-**事件冒泡**指在在一个对象上触发某类事件，如果此对象绑定了事件，就会触发事件，如果没有，就会向这个对象的父级对象传播，最终父级对象触发了事件。
+- **事件冒泡**指在在一个对象上触发某类事件，如果此对象绑定了事件，就会触发事件，如果没有，就会向这个对象的父级对象传播，最终父级对象触发了事件。
 
-**事件捕获**本质上是利用了浏览器事件冒泡的机制。因为事件在冒泡过程中会上传到父节点，并且父节点可以通过事件对象获取到目标节点，因此可以把子节点的监听函数定义在父节点上，由父节点的监听函数统一处理多个子元素的事件，这种方式称为**事件代理**。
+- **事件捕获**本质上是利用了浏览器事件冒泡的机制。因为事件在冒泡过程中会上传到父节点，并且父节点可以通过事件对象获取到目标节点，因此可以把子节点的监听函数定义在父节点上，由父节点的监听函数统一处理多个子元素的事件，这种方式称为**事件代理**。
 
-**事件代理**addEventListener(event, function, useCapture) 绑定一个事件处理函数？
+  **事件代理**addEventListener(event, function, useCapture) 绑定一个事件处理函数？
+
+  事件代理优点：
+
+  - 减少整个页面所需的内存，提升整体性能
+  - 动态绑定，减少重复工作
 
 **阻止事件冒泡**：
 
@@ -599,11 +628,17 @@ data[2]();
 
 1. sort(compare)：注意比较函数的书写
 
+数组转换：
+
+​	join()
+
 数组之函数式编程的方法：
 
 1. map(fn(cur, index, array, thisArgs)) 返回新数组
 2. filter(fn(element, index, array, thisArgs)) 返回新数组
 3. reduce(reducer(acc, cur, idx, array)) 返回结果值
+4. some()
+5. every()
 
 数组扁平化的方法：
 
@@ -616,6 +651,25 @@ data[2]();
 
 1. toString
 2. valueOf
+
+
+
+### 字符串常用方法
+
+**操作方法**：
+
+注意：字符串一旦创建则不可变了，所以以下操作都是副本
+
+- 增：${}	concat	+
+- 删：slice()	substr()	substring()
+- 改：trim()	trimLeft()	trimRight()	repeat()	padStart()	padEnd()	toLowerCase()	toUppweCase()	
+- 查：chatAt()	indexOf()	startWith()	includes()
+
+**转换方法**：
+
+​	split()
+
+
 
 ### valueof & tostring
 
@@ -1012,6 +1066,26 @@ ps:
 1. apply妙用：改变函数传入参数的形式，eg：Math.min.apply(null,array)
 2. 绑定多个call，会选取第一个
 
+作用：改变函数执行时上下文，即改变函数运行时的this指向
+
+区别：
+
+- apply：接收两个参数，第一个参数是this的指向，第二个参数是函数接受的参数（以数组形式），改变this指向后原函数会立即执行，且此方法只是临时改变this指向一次（注：当第一个参数为null，undefined时，默认指向window）
+- call：第一个参数也是this的指向，后面传入一个参数列表，其他和上面一样
+- bind：第一个参数也是this的指向，后面传入一个参数列表，改变this指向后不会立即执行，而是返回一个永久改变this指向的函数
+
+总结：
+
+- 三者都可以改变函数的`this`对象指向
+
+- 三者第一个参数都是`this`要指向的对象，如果没有这个参数或参数为`undefined`或`null`，则默认指向全局`window`
+
+- 三者都可以传参，但是`apply`是数组，而`call`是参数列表，且`apply`和`call`是一次性传入参数，而`bind`可以分为多次传入
+
+- `bind `是返回绑定this之后的函数，`apply `、`call` 则是立即执行
+
+  
+
 代码流程：
 
 - 将函数设为对象的属性
@@ -1161,6 +1235,8 @@ this是一个指针，指向调用函数的对象。指向调用它的地方， 
 2. obj.__proto__ = F.prototype; 我们将这个空对象的__proto__成员指向了F函数对象prototype成员对象;
 
 3. F.call(obj);我们将F函数对象的this指针替换成obj，然后再调用F函数.
+
+   注：根据构建函数返回类型作判断，如果是原始值则被忽略，如果是返回对象，需要正常处理
 
    代码实现：
 
@@ -1391,9 +1467,22 @@ thunk函数：定制化函数
 
 ### ajax原理
 
-Async Javascript and XML，`Ajax`的原理简单来说通过`XmlHttpRequest`对象来向服务器发异步请求，从服务器获得数据，然后用`JavaScript`来操作`DOM`而更新页面
+Async Javascript and XML，`Ajax`的原理简单来说通过`XmlHttpRequest`对象来向服务器发异步请求，从服务器获得数据，然后用`JavaScript`来操作`DOM`而更新页面。传统的Web应用交互由用户触发一个HTTP请求到服务器(浪费带宽)，AJAX应用可以仅向服务器发送并取回必需的数据
 
-传统的Web应用交互由用户触发一个HTTP请求到服务器(浪费带宽)，AJAX应用可以仅向服务器发送并取回必需的数据
+
+
+**实现过程：**
+
+实现Ajax异步交互：
+
+- 创建 `Ajax `的核心对象 `XMLHttpRequest `对象
+- 通过 `XMLHttpRequest` 对象的 `open((method, url, [async][, user][, password])` 方法与服务端建立连接
+- 构建请求所需的数据内容，并通过` XMLHttpRequest` 对象的 `send([body])` 方法发送给服务器端
+- 通过 `XMLHttpRequest` 对象提供的 `onreadystatechange` 事件监听服务器端你的通信状态（主要是监听readyState的状态）
+- 接受并处理服务端向客户端响应的数据结果
+- 将处理结果更新到 `HTML `页面中
+
+
 
 优点：
 
@@ -1548,7 +1637,6 @@ Q:input事件和change事件的区别？
 4. Loader
 
 5. Plugin
-
 
 
 

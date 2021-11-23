@@ -24,6 +24,69 @@
 
    通配选择符、关系选择符(+ > ~)和否定伪类对优先级无影响
 
+   - id选择器
+
+   - 类选择器
+
+   - 标签选择器
+
+   - 后代选择器 #box div 选择id为box元素内部所有的div元素
+
+   - 子选择器 .one>one_1 选择父元素.one中所有的.one_1元素
+
+   - 相邻同胞选择器 .one+.two 选择紧接在.one后的所有.two元素
+
+   - 群组选择器 div，p 选择div，p的所有元素
+
+   - 伪类选择器
+
+     - ```
+       :link ：选择未被访问的链接
+       :visited：选取已被访问的链接
+       :active：选择活动链接
+       :hover ：鼠标指针浮动在上面的元素
+       :focus ：选择具有焦点的
+       :first-child：父元素的首个子元素（一组兄弟中的第一个元素）
+       ```
+
+   - 伪元素选择器
+
+     - ```
+       :first-letter ：用于选取指定选择器的首字母（块级元素）
+       :first-line ：选取指定选择器的首行
+       :before : 选择器在被选元素的内容前面插入内容
+       :after : 选择器在被选元素的内容后面插入内容
+       ```
+
+   - 属性选择器
+
+     - ```
+       [attribute] 选择带有attribute属性的元素
+       [attribute=value] 选择所有使用attribute=value的元素
+       [attribute~=value] 选择attribute属性包含value的元素
+       [attribute|=value]：选择attribute属性以value开头的元素
+       ```
+
+   - 伪类选择器
+
+     - ```
+       :first-of-type 父元素的首个元素
+       :last-of-type 父元素的最后一个元素
+       :only-of-type 父元素的特定类型的唯一子元素
+       :only-child 父元素中唯一子元素
+       :nth-child(n) 选择父元素中第N个子元素
+       :nth-last-of-type(n) 选择父元素中第N个子元素，从后往前
+       :last-child 父元素的最后一个元素
+       :root 设置HTML文档
+       :empty 指定空的元素
+       :enabled 选择被禁用元素
+       :disabled 选择被禁用元素
+       :checked 选择选中的元素
+       :not(selector) 选择非 <selector> 元素的所有元素
+       ```
+
+   注：伪类和伪元素都是以自己为中心
+
 5. 层叠上下文 & 层叠等级 & 层叠顺序
 
    层叠上下文>层叠等级，层叠顺序是规则(如下图)
@@ -54,13 +117,85 @@
 
    字体、字号、颜色等容易被继承，布局、长宽等不被继承
 
-7. CSS3新增伪类
+7. **CSS3新特性**
 
-   nth-child/first-of-type/last-of-type/only-child
+   - background-size background-repeat
+   - rgba和透明度
+   - background-image background-size background-repeat
+   - word-wrap
+   - text-shadow/box-shadow
+   - font-face
+   - border-radius /border-image
+   - 渐变：linear / radial
+   - 字体：任意字体
+   - 2D转换：transform/translate/scale/rotate/
+   - 3D转换：perspective/matrix3d
+   - 过渡属性：**transition**
+   - 动画
+   - **盒模型**
 
-   
+8. CSS3新增特性扩展
 
-8. **居中布局**
+   1. 新增选择器
+
+      - 伪类选择器：nth-child/first-of-type/last-of-type/only-child
+      - 属性选择器
+      - 伪元素选择器
+
+   2. 新增样式
+
+      - 边框：border-radius/box-shadow/border-image
+      - 背景：background-clip/background-origin/background-size/background-break
+      - 文字：word-wrap/text-overflow(文本溢出)/text-shadow/text-dedcoration
+      - 颜色：rgba/hsla
+
+   3. transform转换
+
+      - transform: translate(120px, 50%)：位移
+      - transform: scale(2, 0.5)：缩放
+      - transform: rotate(0.5turn)：旋转
+      - transform: skew(30deg, 20deg)：倾斜
+
+   4. transition过渡
+
+      ```
+      transition-property: width; 
+      transition-duration: 1s;
+      transition-timing-function: linear;
+      transition-delay: 2s;
+      ```
+
+      上面的简写：transition:  CSS属性，花费时间，效果曲线(默认ease)，延迟时间(默认0)
+
+   5. animation动画
+
+      - animation-name：动画名称
+      - animation-duration：动画持续时间
+      - animation-timing-function：动画时间函数
+      - animation-delay：动画延迟时间
+      - animation-iteration-count：动画执行次数，可以设置为一个整数，也可以设置为infinite，意思是无限循环
+      - animation-direction：动画执行方向
+      - animation-paly-state：动画播放状态
+      - animation-fill-mode：动画填充模式
+
+   6. CSS动画
+
+      三种方式实现：
+
+      - transition实现渐变动画
+      - transform转变动画（不支持inline元素）
+      - animation实现自定义动画（@keyframes from+to/百分比）
+
+   7. 渐变
+
+      - linear-gradient：线性渐变
+      - radial-gradient：径向渐变
+
+   8. 布局
+
+      flex弹性布局，Grid栅格布局
+
+9. **居中布局**
 
    - 水平居中
 
@@ -96,13 +231,11 @@
 
      6. 父：display:tabel-cell + vertical-align:middle + text-align: center + 子：display: line-block
 
-        
-
-9. display值
+10. display值
 
    none/inline/block/list-item/inline-block/table/flex/inline-flex
 
-10. position
+11. position
 
     - static(正常文档流)
     - relative(相对自身static)/仍占用空间
@@ -110,67 +243,75 @@
     - fixed(相对窗口)/会脱离正常文档流(不占空间)
     - sticky(=relative+fixed) 元素根据正常文档流进行定位，然后相对它的最近滚动祖先。当该祖先的`overflow` 是 `hidden`, `scroll`, `auto`, 或 `overlay`时注意事项：父元素不能overflow:auto/hidden; 必须指定top/bottom/left/right; 高度最小值；父元素内生效
 
-11. **CSS3新特性**
+12. flex布局
 
-   - background-size background-repeat
+      注意：设置flex布局后，子元素float/clear/vertical-align属性会失效
 
-   - rgba和透明度
+      main axis/ cross axis	
 
-   - background-image background-size background-repeat
+       六个容器属性
 
-   - word-wrap
+    - flex-direction: 决定主轴上项目排列的方向
+    - flex-wrap: 定义项目超出高度如何换行
+    - flex-flow: flex-direction + flex-wrap
+    - justify-content：定义项目在主轴上的对齐方式
+    - align-items:定义项目在交叉轴上的对齐方式
+    - align-content：定义多根轴线的对齐方式
 
-   - text-shadow/box-shadow
+      项目属性：
 
-   - font-face
+    - order: integer 定义项目的排序顺序， 数值越大排序越前
+    - flex-grow: 定义项目的放大比例
+    - flex-shrink：定义项目的缩小比例
+    - flex-basis: 定义多余分配空间
+    - flex: flex-grow, flex-shrink, flex-basis
+    - align-self: 自身的对齐方式
 
-   - border-radius /border-image
+13. Grid网格布局 
 
-   - 渐变：linear / radial
+    定义：网格布局，网格元素只能是容器的顶层元素	
 
-   - 字体：任意字体
+    属性：（容器属性和项目属性）
 
-   - 2D转换：transform/translate/scale/rotate/
+    display: grid 块级元素
 
-   - 3D转换：perspective/matrix3d
+    display：inline-grid 行内元素
 
-   - 过渡属性：**transition**
+    grid-template-rows 属性 + repeat(num/auto-fill)	fr片段	minmax()	auto
 
-   - 动画
+    grid-template-columns 属性
 
-   - **盒模型**
+    `grid-row-gap` 属性、`grid-column-gap` 属性 设置行列间距	grid-gap简写
 
-     
+    grid-templates-areas：划分区域
 
-11. flex布局
+    grid-auto-flow:默认先行后列
 
-   注意：设置flex布局后，子元素float/clear/vertical-align属性会失效
+    justify-items: start | end | center | stretch;设置单元格内容的水平位置
 
-   ​	main axis/ cross axis	
+    align-items: start | end | center | stretch;设置单元格的垂直位置
 
-   六个容器属性
+    justify-content: start | end | center | stretch | space-around | space-between | space-evenly; 整个内容区域在容器里面的水平位置（左中右）
 
-   - flex-direction: 决定主轴上项目排列的方向
-   - flex-wrap: 定义项目超出高度如何换行
-   - flex-flow: flex-direction + flex-wrap
-   - justify-content：定义项目在主轴上的对齐方式
-   - align-items:定义项目在交叉轴上的对齐方式
-   - align-content：定义多根轴线的对齐方式
+    align-content: 整个内容区域的垂直位置（上中下）
 
-   项目属性：
+    place-content
 
-   - order: integer 定义项目的排序顺序， 数值越大排序越前
-   - flex-grow: 定义项目的放大比例
-   - flex-shrink：定义项目的缩小比例
-   - flex-basis: 定义多余分配空间
-   - flex: flex-grow, flex-shrink, flex-basis
-   - align-self: 自身的对齐方式
+    显示网格和隐式网格：
 
-11. 常见的兼容问题
+    ​	grid-auto-columns/grid-auto-rows 指定隐式网格的位置
 
-    - chrome中文字体：12px； -webkit-text-size-adjust: none;
+    ​	grid-columns-start 	grid-columns-end	grid-row-start	grid-row-end
 
-12. BFC
+    ​	grid-area 指定放哪个区域 和grid-template-areas
+
+    ​	justify-self align-self place-self :start | end | center | stretch;
+
+14. 常见的兼容问题
+
+    chrome中文字体：12px； -webkit-text-size-adjust: none;
+
+15. BFC
 
     定位方案：
 
@@ -187,12 +328,12 @@
     - 根元素，即html
     - float的值不为none（默认）
     - overflow的值不为visible（默认）
-    - display：inline-block|table
+    - display：inline-block、inltable-cell、table-caption、table、inline-table、flex、inline-flex、grid、inline-grid
     - position：absolut|fixed(优先级最高)
 
-13. 浮动和清除浮动
+16. 浮动和清除浮动
 
-    浮动带来的问题：父元素无法撑开，
+    浮动带来的问题：父元素无法撑开
 
     清除浮动：
 
@@ -202,15 +343,15 @@
     - 利用伪元素，在父级新增类名并增加样式 .clearfix::after{display:block; clear: both}
     - **父级元素添加样式**：overflow值不为visible，其它值效果不一。原理：BFC
 
-15. CSS优化
-
-16. select+option 多选框 / fieldset+legend 特殊表单
-
 17. 实现三角形
 
     width:0; height:0; solid; transparent
 
-17. display:none & visibility:hidden &opacity:0 区别
+18. css优化
+
+    select+option 多选框 / fieldset+legend 特殊表单
+
+19. display:none & visibility:hidden &opacity:0 区别
 
     - 空间占据：不占位置/占位置/占位置
     - 是否继承：不被子元素继承/会被子元素继承(可设置visibility：visible显示)/会继承但不能设置opacity:0重新显示子元素
@@ -224,7 +365,9 @@
       1. css3动画在性能上会好些但控制上不够灵活
       2. js动画控制能力强，预渲染性能不好
 
-18. CSS动画属性
+    ps：若想使元素不可见，还可以设置宽高为0结合overflow/clip-path?
+
+20. CSS动画属性
 
     - animation-name：动画名，对应@keyframes
     - animation-duration：运行时间
@@ -235,14 +378,14 @@
     - animation-fill-mode：静止模式/forwards：停留时保留最后一帧/backwards：停止时回到第一帧/both：同时运用forwards和backwards
     - animation-play-state：指定动画播放状态
 
-19. 两栏布局的实现
+21. 两栏布局的实现
 
     - container:overflow:hidden + div1: float:left + div2: margin-left
     - container:display:flex + div1: width:200px + flex: 1
     - container: overflow:hidden + div1:position:absolute width:200px + div2:margin-left:200px;
     - container: display:table + div1:display:table-cell + div2: display:table-cell
 
-20. 三栏布局的实现
+22. 三栏布局的实现
 
     这两种方式都是打乱正常布局流：所以div的分配是left/right/mid
 
@@ -255,9 +398,96 @@
     - grid布局：grid-template-columns: 300px auto 200px;不受check的影响
     - table布局：每一列都设置display: table-cell，设置左右的宽度，中间width:100%,内容超过后会扩大。
 
-21. Q&A
+23. em/px/rem/vh/vw的区别
 
-    - 子元素自适应？子元素设置百分比/子元素不设宽高，利用定位来实现自适应；
+    相对长度单位：em/ex/ch/rem/vw/vh/vmin/vmax/%
+
+    绝对长度单位：cm/mm/in/px/pt/pc
+
+    px：绝对单位，按像素计算
+
+    em：相对当前对象文本的字体尺寸。默认（1em=16px）
+
+    rem：相对HTML根元素中font-size的值	tip：html{font-size: 62.5%}
+
+    vh,vm：根据窗口的宽度调整
+
+24. 设备像素、css像素、设备独立像素、dpr、ppi之间的区别
+
+    css规范：
+
+    - px是一个相对单位，相对于设备像素
+    - 同一设备上，每一个css像素所代表的设备像素是可变的（调整屏幕分辨率）
+    - 不同设备上，每一个css像素所代表的设备像素是可以变化的
+
+    ppi：每英寸像素
+
+    dpr：设备像素比
+
+25. 继承属性
+
+    - 字体系列属性：font, font-family, font-weight, font-size, font-style, font-variant, font-stretch, font-size-adjust
+
+    - 文本系列属性: text-indent, text-align, line-height, word-spacing, letter-spacing, text-transform, dirextion, color
+
+    - 元素可见性: visibility
+
+    - 表格布局属性: caption-side, border-collapse, border-spacing, empty-cells, table-layout
+
+    - 列表属性:list-style-type, list-style-image, list-style-position, list-style
+
+    - 引用
+
+    - 光标属性: cursor
+
+    - 生成内容属性：quotes
+
+    - 页面样式属性：page, page-break-inside, windows, orphans
+
+    - 声音样式属性
+
+      注意：a标签的字体颜色不能被继承； h1-h6标签字体也不能被继承
+
+26. 性能优化
+
+    - 内联首屏关键CSS
+    - 异步加载CSS
+    - 资源压缩：webpack模块化工具
+    - 合理使用选择器：少嵌套， 通配符和属性选择器效率最低
+    - 减少使用昂贵的属性：box-shadow/border-radius/filter/:nth-child/透明度
+    - 不要使用@import，使用link
+
+    
+
+27. CSS预处理器
+
+    - sass
+    - less
+    - stylus
+
+28. 让chrome支持小于12px的文字方式
+
+    - zoom
+    - -webkit-transform:scale()
+    - -webkit-text-size-adjust:none
+
+29. Q&A
+
+    子元素自适应？子元素设置百分比/子元素不设宽高，利用定位来实现自适应；
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
