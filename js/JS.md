@@ -48,6 +48,11 @@ Array.prototype.push.call()等类似写法
 - var声明的全局变量
 - var在函数范围内声明的局部变量
 
+Q：var a=1 和 a=1的区别是什么？
+
+1. 用var声明的变量除value可修改之外，configurable、delete的属性都为false。
+2. a=1表示window.a = 1，属性Configurable等都为true
+
 
 
 ### for in 和 for of
@@ -101,9 +106,7 @@ ECMAScript 采用 IEEE754 标准，全称 IEEE 二进制浮点数算术标准。
 
 ### settimeout设置为0时会怎样？
 
-settimeout会有一个时间的最小值，是几毫秒，当你设置0的时候是不会成功的
-
-事件循环
+settimeout会有一个时间的最小值，是4ms，当你设置0的时候是不会成功的
 
 
 
@@ -314,6 +317,8 @@ null表示空对象 undefined 表示已在作用域中但未赋值的变量
 
 1. 获取匹配：pattern.exec(text)，返回匹配的字符
 2. 是否模式匹配：pattern.test(text)，返回true/false
+3. 标记：g：全局，一个不断捕获的过程；i：忽略大小写；[]表示其中之一，()？表示局部匹配；d{length}匹配不同长度的字符。
+4. 注意：元字符的转义
 
 
 
@@ -331,13 +336,30 @@ Object.is(NaN, NaN)  // true
 
 
 
-### Map、weakMap和Set
+### Map和Set
 
-set：数据不重复
+共同点：
 
-map：允许多种数据类型的key
+- 都是关联式容器，底层实现都是红黑树(RBTree)
+
+set：
+
+- 可以存放各种类型的数据，只有key，key就是value
+- key不能重复
+- 不能通过迭代器来改变set的值
+- 所有的元素都会被自动排序(存疑？)
+
+map：
+
+- 数据是以key：value的形式存储
+- 不允许key重复，且不能修改key，但可以修改key对应的value
+- 所有的元素都会被自动排序(存疑？)
 
 weakmap：只能以复杂数据类型作为key(如数组)，并且key值是弱引用
+
+Q：map和object的区别？
+
+A：object默认有原型除非利用Object.create(null)创建没有原型的对象；在object中只有symbol和string能作为key，数据会根据key进行排序。但在map中，key的类型没有限制，且数据的顺序根据添加的数据来。对于获取长度，map可以利用size属性，而object的长度需另寻他法，比如遍历。
 
 
 
@@ -604,10 +626,11 @@ data[2]();
 1. map(fn(cur, index, array, thisArgs)) 返回新数组
 2. filter(fn(element, index, array, thisArgs)) 返回新数组
 3. reduce(reducer(acc, cur, idx, array)) 返回结果值
+4. some(element, index, array) 有一个真则为真
 
 数组扁平化的方法：
 
-1. 普通递归
+1. 普通递归：some+concat
 2. ES6中的flat()方法
 3. 利用reduce函数进行递归
 4. 扩展运算符
@@ -1228,6 +1251,13 @@ this是一个指针，指向调用函数的对象。指向调用它的地方， 
 
 ### 发布订阅模式
 
+主要思想：创建一个容器放置要发布的事件，添加事件on，删除事件off，emit发布(是指将容器中的事件都执行一遍)。
+
+应用：
+
+1. 插广告
+2. 打点
+
 ### 解析URL参数为对象
 
 ### 字符串模板
@@ -1303,7 +1333,7 @@ ps：注意监听的事件以及它对应的输出
                     last = now
                     fun.apply(that, _args)
                 }, delay)
-            }else {//否则，立即执行函数
+            }else{//否则，立即执行函数
                 last = now
                 fun.apply(that,_args)
             }
@@ -1327,7 +1357,7 @@ ps：注意监听的事件以及它对应的输出
 
 ### Promise
 
-如何解决回调地狱：
+解决回调地狱：
 
 - 回调函数延迟绑定
 - 返回值穿透
@@ -1369,7 +1399,7 @@ A：循环里面执行的代码会乱序。解决方案：for-of(本质是迭代
 
 **如果在async函数中抛出了错误，则终止错误结果，不会继续向下执行。**如果想要使得错误的地方不影响`async`函数后续的执行的话，可以使用`try catch`
 
-### 
+
 
 ### 生成器
 
@@ -1548,7 +1578,6 @@ Q:input事件和change事件的区别？
 4. Loader
 
 5. Plugin
-
 
 
 

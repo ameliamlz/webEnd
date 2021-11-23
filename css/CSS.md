@@ -98,10 +98,6 @@
 
         
 
-9. display值
-
-   none/inline/block/list-item/inline-block/table/flex/inline-flex
-
 10. position
 
     - static(正常文档流)
@@ -206,16 +202,23 @@
 
 16. select+option 多选框 / fieldset+legend 特殊表单
 
-17. 实现三角形
+16. 实现三角形
 
     width:0; height:0; solid; transparent
 
-17. display:none & visibility:hidden &opacity:0 区别
+17. display值
+
+    none/inline/block/list-item/inline-block/table/flex/inline-flex
+
+18. display:none & visibility:hidden &opacity:0 区别
+
+    https://segmentfault.com/a/1190000015116392
 
     - 空间占据：不占位置/占位置/占位置
-    - 是否继承：不被子元素继承/会被子元素继承(可设置visibility：visible显示)/会继承但不能设置opacity:0重新显示子元素
-    - 事件绑定：不能触发/不会触发/可以触发
-    - 过渡动画：无效/无效/有效
+    - 是否继承：受父元素影响/不受父元素影响/受父元素影响
+    - 是否影响其他元素触发事件：不会/不会/会
+    - 产生回流or重绘：回流/产生重绘/产生重绘or not
+    - transition：无效/效果表现为延迟显示/有效
 
     display：none 不显示对应的元素，在文档布局中不再分配空间（回流+重绘）
     visibility：hidden 隐藏对应元素，在文档布局中仍保留原来的空间（重绘）
@@ -224,7 +227,7 @@
       1. css3动画在性能上会好些但控制上不够灵活
       2. js动画控制能力强，预渲染性能不好
 
-18. CSS动画属性
+19. CSS动画属性
 
     - animation-name：动画名，对应@keyframes
     - animation-duration：运行时间
@@ -235,14 +238,14 @@
     - animation-fill-mode：静止模式/forwards：停留时保留最后一帧/backwards：停止时回到第一帧/both：同时运用forwards和backwards
     - animation-play-state：指定动画播放状态
 
-19. 两栏布局的实现
+20. 两栏布局的实现
 
     - container:overflow:hidden + div1: float:left + div2: margin-left
     - container:display:flex + div1: width:200px + flex: 1
     - container: overflow:hidden + div1:position:absolute width:200px + div2:margin-left:200px;
     - container: display:table + div1:display:table-cell + div2: display:table-cell
 
-20. 三栏布局的实现
+21. 三栏布局的实现
 
     这两种方式都是打乱正常布局流：所以div的分配是left/right/mid
 
@@ -255,7 +258,7 @@
     - grid布局：grid-template-columns: 300px auto 200px;不受check的影响
     - table布局：每一列都设置display: table-cell，设置左右的宽度，中间width:100%,内容超过后会扩大。
 
-21. Q&A
+22. Q&A
 
     - 子元素自适应？子元素设置百分比/子元素不设宽高，利用定位来实现自适应；
 
