@@ -24,6 +24,13 @@
 
    通配选择符、关系选择符(+ > ~)和否定伪类对优先级无影响
 
+   **组合选择器**：
+
+   - 后代选择器(以空格   分隔)：一个父元素下的子元素、曾子元素等
+   - 子元素选择器(以大于 **>** 号分隔）：一个父元素下的一级子元素
+   - 相邻兄弟选择器（以加号 **+** 分隔）：紧密相邻，有同一父元素
+   - 普通兄弟选择器（以波浪号 **～** 分隔）：可间隔其它元素，只要是同一级且相邻，则指定元素之后的所有相邻兄弟元素。
+
 5. 层叠上下文 & 层叠等级 & 层叠顺序
 
    层叠上下文>层叠等级，层叠顺序是规则(如下图)
@@ -98,15 +105,15 @@
 
         
 
-10. position
+9. position
 
-    - static(正常文档流)
-    - relative(相对自身static)/仍占用空间
-    - absolute(参考最近一个不为static的父级元素)/会脱离正常文档流(不占空间)
-    - fixed(相对窗口)/会脱离正常文档流(不占空间)
-    - sticky(=relative+fixed) 元素根据正常文档流进行定位，然后相对它的最近滚动祖先。当该祖先的`overflow` 是 `hidden`, `scroll`, `auto`, 或 `overlay`时注意事项：父元素不能overflow:auto/hidden; 必须指定top/bottom/left/right; 高度最小值；父元素内生效
+   - static(正常文档流)
+   - relative(相对自身static)/仍占用空间
+   - absolute(参考最近一个不为static的父级元素)/会脱离正常文档流(不占空间)
+   - fixed(相对窗口)/会脱离正常文档流(不占空间)
+   - sticky(=relative+fixed) 元素根据正常文档流进行定位，然后相对它的最近滚动祖先。当该祖先的`overflow` 是 `hidden`, `scroll`, `auto`, 或 `overlay`时注意事项：父元素不能overflow:auto/hidden; 必须指定top/bottom/left/right; 高度最小值；父元素内生效
 
-11. **CSS3新特性**
+10. **CSS3新特性**
 
    - background-size background-repeat
 
