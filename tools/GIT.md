@@ -1,4 +1,11 @@
-## GIT
+## GIT基本命令
+
+- git log：查看日志，按q退出
+- git commit --amend：在没push之前仍可以更改提交的信息，进入编辑模型，ESC退出编辑，wq!保存退出
+
+
+
+## GIT提交分支
 
 Merge Request and Pull Request解决冲突:
 
